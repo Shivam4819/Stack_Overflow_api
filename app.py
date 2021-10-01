@@ -16,8 +16,6 @@ def home():
     return "Hello, Flask!"
 
 
-# this function check hit count within one minute and update the count
-# it also insert the count and time if the user has hit for first time
 def check(uid):
     if r.get(uid)==None:
         sec=time.time()
@@ -51,14 +49,6 @@ def check(uid):
             return {'status': True, 'msg': "5 hit remaining in one minute"}
 
 
-# This api first check number of hits remaning within one min
-# If hit count is less than 5 then it do two things
-#   1. check whether the same question is present in redis or not
-#       if the data is present in redis then it bring that data from redis and return as response
-#   2. If data is not present in redis then it hits the stackoverflow and save the response in redis
-#       and send that data as response to user
-
-# If hit count is more than 5 then it send response to user to wait
 
 @app.route('/stack',methods=['GET'])
 def get_stack_overflow_data():
